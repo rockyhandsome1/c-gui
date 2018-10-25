@@ -13,7 +13,15 @@ printf("\nmouse mot available\n");
 else      //standard return value (hexcode is) FFFH
 printf("\nmouse available\n");
 i.x.ax=1;   //displays mouse on the screen
-printf("\nis it seen?\n");
+printf("\nmouse is put to work\n");
 int86(0x33,&i,&o);//calling interrupt again
+//accessing the position
+while(!kbhit())
+{
+i.x.ax=3;//to get the position
+int86(0x33,&i,&o);
+printf("%d\t%d",o.x.cx,o.x.dx);
+delay(1000);
+}
 getch();
 }
