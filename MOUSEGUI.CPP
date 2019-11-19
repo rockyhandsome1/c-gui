@@ -40,7 +40,7 @@ void main()
 void mStatus()
 {
 	i.x.ax=0; //asssigned value to the union var for checking mouse status
-	int86(0x33,&i,&o);//calling an interrupt
+	int86(0x33,&i,&o);  //calling interrupt
 	if(o.x.ax==0)
 	  printf("mouse is not available\n\n");
 	else      //standard return value (hexcode is) FFFFH
@@ -50,7 +50,7 @@ void mStatus()
 void mDisplay()
 {
 	i.x.ax=1;   //displays mouse on the screen
-	int86(0x33,&i,&o);//calling interrupt again
+	int86(0x33,&i,&o);  //calling interrupt 
 	if(o.x.ax=0)
 	printf("error in displaying the mouse\n\n");
 	else
@@ -62,7 +62,7 @@ void xyPosition()
   i.x.ax=3;//to get the position
   while(!kbhit())
   {
-     int86(0x33,&i,&o);
+     int86(0x33,&i,&o);  //calling interrupt
      gotoxy(1,1);
      printf("X:%d\tY:%d",o.x.cx,o.x.dx);
      delay(10);
@@ -73,7 +73,7 @@ void clickcheck()
  i.x.ax=3;
  while(!kbhit())
  {
-   int86(0x33,&i,&o);
+   int86(0x33,&i,&o);  //calling interrupt
    gotoxy(1,1);
 	 switch (o.x.bx)
 	{
